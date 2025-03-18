@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avimora Countdown</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: #0f0f0f;
+        font-family: "Arial", sans-serif;
+        color: #fff;
+        padding: 20px;
+      }
+
+      header {
+        text-align: center;
+        margin-top: 30px;
+        opacity: 0;
+        transform: translateY(-20px);
+        animation: fadeIn 1s ease forwards;
+      }
+
+      header img {
+        max-width: 180px;
+        margin-bottom: 15px;
+      }
+
+      header h1 {
+        font-size: 4rem;
+        color: #ffffff;
+        letter-spacing: 3px;
+      }
+
+      header p {
+        font-size: 1.8rem;
+        color: #ffffff;
+        margin-top: 8px;
+        font-style: italic;
+      }
+
+      .countdown {
+        display: flex;
+        gap: 20px;
+        text-align: center;
+      }
+
+      .countdown div {
+        background: #1e1e1e;
+        padding: 20px;
+        border-radius: 12px;
+        min-width: 70px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+      }
+
+      .countdown div:hover {
+        transform: translateY(-5px);
+      }
+
+      .countdown div h1 {
+        font-size: 2.5rem;
+        margin-bottom: 5px;
+        color: #ffffff;
+      }
+
+      .countdown div span {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #ccc;
+      }
+
+      footer {
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+      }
+
+      footer a {
+        color: #888;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      footer a:hover {
+        color: #00ff99;
+      }
+
+      @media (max-width: 500px) {
+        header img {
+          max-width: 120px;
+        }
+
+        header h1 {
+          font-size: 2.5rem;
+        }
+
+        header p {
+          font-size: 1.2rem;
+        }
+
+        .countdown {
+          gap: 10px;
+        }
+
+        .countdown div {
+          padding: 15px;
+          min-width: 60px;
+        }
+
+        .countdown div h1 {
+          font-size: 2rem;
+        }
+
+        .countdown div span {
+          font-size: 0.7rem;
+        }
+
+        footer {
+          font-size: 0.8rem;
+        }
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <!-- Replace below with your actual logo path -->
+      <img src="logo.jpeg" alt="Avimora Logo" />
+      <h1>Avimora</h1>
+      <p>A surprise awaits you</p>
+    </header>
+
+    <div class="countdown">
+      <div>
+        <h1 id="days">00</h1>
+        <span>Days</span>
+      </div>
+      <div>
+        <h1 id="hours">00</h1>
+        <span>Hours</span>
+      </div>
+      <div>
+        <h1 id="minutes">00</h1>
+        <span>Minutes</span>
+      </div>
+      <div>
+        <h1 id="seconds">00</h1>
+        <span>Seconds</span>
+      </div>
+    </div>
+
+    <footer>
+      <a href="mailto:info@avimora.com">info@avimora.com</a>
+    </footer>
+
+    <script>
+      const daysEl = document.getElementById("days");
+      const hoursEl = document.getElementById("hours");
+      const minutesEl = document.getElementById("minutes");
+      const secondsEl = document.getElementById("seconds");
+
+      function updateCountdown() {
+        const now = new Date();
+        const currentYear =
+          now.getMonth() >= 3 ? now.getFullYear() + 1 : now.getFullYear();
+        const targetDate = new Date(`April 1, ${currentYear} 00:00:00`);
+        const diff = targetDate - now;
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        daysEl.textContent = d.toString().padStart(2, "0");
+        hoursEl.textContent = h.toString().padStart(2, "0");
+        minutesEl.textContent = m.toString().padStart(2, "0");
+        secondsEl.textContent = s.toString().padStart(2, "0");
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+    </script>
+  </body>
+</html>
